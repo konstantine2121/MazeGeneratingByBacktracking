@@ -43,8 +43,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CellType.cs" />
+    <Compile Include="Input.cs" />
+    <Compile Include="Maze.cs" />
+    <Compile Include="MazeDebugView.cs" />
+    <Compile Include="MazeGenerator.cs" />
+    <Compile Include="Point.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Range.cs" />
+    <Compile Include="Size.cs" />
+    <Compile Include="SizeExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
