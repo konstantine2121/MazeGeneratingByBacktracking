@@ -1,5 +1,8 @@
-﻿namespace MazeGeneratingByBacktracking
+﻿using System.Diagnostics;
+
+namespace MazeGeneratingByBacktracking
 {
+    [DebuggerTypeProxy(typeof(MazeDebugView))]
     internal class Maze
     {
         private readonly CellType[,] _cells;

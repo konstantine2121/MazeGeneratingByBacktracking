@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace MazeGeneratingByBacktracking
 {
-    [DebuggerTypeProxy(typeof(MazeDebugView))]
     internal class MazeGenerator
     {
+        private const int Step = 2;
+        private const int TopLeftIndex = 1;
         private static readonly Random _random = new Random();
 
         public Maze Generate(Size size)
@@ -16,9 +16,10 @@ namespace MazeGeneratingByBacktracking
 
             var newSize = size.AddWalls();
             var maze = new Maze(newSize);
-            var visitedCells = new bool[newSize.Height, newSize.Width];
+            InitializeMaze(maze);
+            var visitedCells = new bool[maze.Height, maze.Width];
             var stack = new Stack<Point>();
-            var start = new Point(0, 0);
+            var start = new Point(TopLeftIndex, TopLeftIndex);
             var currient = start;
             //1. Сделайте начальную клетку текущей и отметьте ее как посещенную.
             MarkPoint(visitedCells, start);
@@ -32,7 +33,6 @@ namespace MazeGeneratingByBacktracking
                 if (unvisitedNeighbors.Any())
                 {
                     stack.Push(currient);
-                    //var next = GetRandomNeighbor(currient, maze);
                     var next = unvisitedNeighbors[_random.Next(unvisitedNeighbors.Length)];
                     RemoveWall(currient, next, maze);
                     currient = next;
@@ -59,6 +59,17 @@ namespace MazeGeneratingByBacktracking
             return maze;
         }
 
+        private static void InitializeMaze(Maze maze)
+        {
+            for (int x = TopLeftIndex; x < maze.Width; x+= Step)
+            {
+                for (int y = TopLeftIndex; y < maze.Height; y+= Step)
+                {
+                    maze[x, y] = CellType.Floor;
+                }
+            }
+        }
+
         private static void MarkPoint(bool[,] visitedCells, Point point)
         {
             visitedCells[point.Y, point.X] = true;
@@ -74,9 +85,9 @@ namespace MazeGeneratingByBacktracking
 
         private static bool HasUnvisitedCells(bool[,] visitedCells)
         {
-            for (int i = 0;i < visitedCells.GetLength(0); i++) 
+            for (int i = TopLeftIndex; i < visitedCells.GetLength(0) - 1; i+=Step) 
             {
-                for (int j = 0; j < visitedCells.GetLength(1); j++)
+                for (int j = TopLeftIndex; j < visitedCells.GetLength(1) - 1; j+=Step)
                 {
                     if (!visitedCells[i, j])
                     {
@@ -99,19 +110,19 @@ namespace MazeGeneratingByBacktracking
 
         private static Point[] GetNeighbors(Point point, Maze maze)
         {
-            const int step = 2;
+            const int Step = 2;
 
-            var upPoint = new Point(0, -step) + point;
-            var downPoint = new Point(0, step) + point;
-            var leftPoint = new Point(-step, 0) + point;
-            var rightPoint = new Point(step, 0) + point;
+            var up = new Point(0, -Step) + point;
+            var down = new Point(0, Step) + point;
+            var left = new Point(-Step, 0) + point;
+            var right = new Point(Step, 0) + point;
 
             Point[] neighborsPoints =
             {
-                upPoint,
-                downPoint,
-                leftPoint,
-                rightPoint
+                up,
+                down,
+                left,
+                right
             };
 
             return neighborsPoints
@@ -139,9 +150,9 @@ namespace MazeGeneratingByBacktracking
         {
             var unvisitedPoints = new List<Point>();
 
-            for (int i = 0; i < visitedCells.GetLength(0); i++)
+            for (int i = TopLeftIndex; i < visitedCells.GetLength(0)- 1; i+=Step)
             {
-                for (int j = 0; j < visitedCells.GetLength(1); j++)
+                for (int j = TopLeftIndex; j < visitedCells.GetLength(1) - 1; j+=Step)
                 {
                     if (!visitedCells[i, j])
                     {
