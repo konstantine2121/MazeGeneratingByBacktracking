@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
+using MazeGenerating.DebugViews;
 
-namespace MazeGeneratingByBacktracking
+namespace MazeGenerating.Data
 {
     [DebuggerTypeProxy(typeof(MazeDebugView))]
     internal class Maze

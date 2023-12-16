@@ -1,6 +1,7 @@
 ﻿using System.Text;
+using MazeGenerating.Data;
 
-namespace MazeGeneratingByBacktracking
+namespace MazeGenerating.DebugViews
 {
     internal class MazeDebugView
     {

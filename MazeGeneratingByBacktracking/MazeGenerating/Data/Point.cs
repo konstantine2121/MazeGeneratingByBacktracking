@@ -1,7 +1,6 @@
 ﻿using System;
-using System.CodeDom;
 
-namespace MazeGeneratingByBacktracking
+namespace MazeGenerating.Data
 {
     internal struct Point
     {

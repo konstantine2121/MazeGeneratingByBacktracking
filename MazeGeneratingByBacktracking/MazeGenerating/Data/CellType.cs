@@ -1,4 +1,4 @@
-﻿namespace MazeGeneratingByBacktracking
+﻿namespace MazeGenerating.Data
 {
     internal enum CellType
     {

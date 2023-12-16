@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using MazeGenerating.Data;
+using MazeGenerating.Extensions;
 
-namespace MazeGeneratingByBacktracking
+namespace MazeGenerating
 {
     internal class MazeGenerator
     {
@@ -61,9 +63,9 @@ namespace MazeGeneratingByBacktracking
 
         private static void InitializeMaze(Maze maze)
         {
-            for (int x = TopLeftIndex; x < maze.Width; x+= Step)
+            for (int x = TopLeftIndex; x < maze.Width; x += Step)
             {
-                for (int y = TopLeftIndex; y < maze.Height; y+= Step)
+                for (int y = TopLeftIndex; y < maze.Height; y += Step)
                 {
                     maze[x, y] = CellType.Floor;
                 }
@@ -85,9 +87,9 @@ namespace MazeGeneratingByBacktracking
 
         private static bool HasUnvisitedCells(bool[,] visitedCells)
         {
-            for (int i = TopLeftIndex; i < visitedCells.GetLength(0) - 1; i+=Step) 
+            for (int i = TopLeftIndex; i < visitedCells.GetLength(0) - 1; i += Step)
             {
-                for (int j = TopLeftIndex; j < visitedCells.GetLength(1) - 1; j+=Step)
+                for (int j = TopLeftIndex; j < visitedCells.GetLength(1) - 1; j += Step)
                 {
                     if (!visitedCells[i, j])
                     {
@@ -140,7 +142,7 @@ namespace MazeGeneratingByBacktracking
 
         private static void RemoveWall(Point currient, Point next, Maze maze)
         {
-            var centerX = (currient.X + next.X) / 2; 
+            var centerX = (currient.X + next.X) / 2;
             var centerY = (currient.Y + next.Y) / 2;
 
             maze[centerX, centerY] = CellType.Floor;
@@ -150,9 +152,9 @@ namespace MazeGeneratingByBacktracking
         {
             var unvisitedPoints = new List<Point>();
 
-            for (int i = TopLeftIndex; i < visitedCells.GetLength(0)- 1; i+=Step)
+            for (int i = TopLeftIndex; i < visitedCells.GetLength(0) - 1; i += Step)
             {
-                for (int j = TopLeftIndex; j < visitedCells.GetLength(1) - 1; j+=Step)
+                for (int j = TopLeftIndex; j < visitedCells.GetLength(1) - 1; j += Step)
                 {
                     if (!visitedCells[i, j])
                     {

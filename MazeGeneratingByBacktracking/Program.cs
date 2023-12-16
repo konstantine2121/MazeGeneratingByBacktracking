@@ -1,4 +1,8 @@
-﻿namespace MazeGeneratingByBacktracking
+﻿using MazeGenerating;
+using MazeGenerating.Data;
+using MazeGenerating.DebugViews;
+
+namespace MazeGeneratingByBacktracking
 {
     internal class Program
     {

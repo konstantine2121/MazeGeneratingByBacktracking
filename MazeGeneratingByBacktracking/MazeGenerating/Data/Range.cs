@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MazeGeneratingByBacktracking
+namespace MazeGenerating.Data
 {
     internal class Range
     {
